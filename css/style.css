@@ -33,7 +33,7 @@ header img {
     width: 100px;
 }
 
-header label {
+header #iconPesquisa {
     flex-grow: 1;
     margin: 0 2.5em 0 2.5em;
     position: relative;
@@ -63,7 +63,7 @@ header input:focus {
     color: #737373;
 }
 
-label:before {
+header #iconPesquisa:before {
     content: "";
     position: absolute;
     left: 0.75em;
@@ -91,34 +91,28 @@ header button:hover {
     background-color: #4f46e5;
 }
 
-@keyframes anima1{
-    0%{
-        border-radius: 0;
-    }
-    100%{
-        border-radius: 20px
-    }
-}
-
 nav {
-    display: flex;
+    display: grid;
+    grid-template-columns: 9% 9% 8% 9% 8% 8% 13% 14% 8% 14%;
     max-width: 1280px;
-    font-size: 12pt;
-    justify-content: space-between;
+    font-size: 8pt;
     margin: auto;
     border-top: 1px solid #f5f5f5;
     height: 40px;
+    font-weight: bold;
 }
 
 nav a {
+    display: inline-flex;
+    height: 100%;
     padding: 0 15px;
+    transition: 0.15s;
+    justify-content: center;
 }
 
 nav a:hover {
     background-color: #f5f5f5;
     color: #4f46e5;
-    border-radius: 20px;
-    animation: anima1 0.3s;
 }
 
 .sectionTitle {
@@ -205,15 +199,16 @@ article span {
 footer {
     background-color: #f5f5f5;
     display: flex;
-    padding: 1.5em 2.5em 1.5em 2.5em;
+    padding: 1.5em 2.5em;
     margin-top: 20px;
 }
 
 form {
     display: grid;
+    flex-grow: 1;
     grid-template-columns: 80px 2fr 80px 2fr 80px 2fr;
     gap: 15px;
-    margin: 20px 0;
+    margin: 20px 1.5em 20px 0;
     align-items: center;
 }
 
@@ -223,65 +218,22 @@ footer svg {
 
 textarea {
     grid-column-start: 2;
-    grid-column-end: 7;
+    grid-column-end: -1;
     resize: none;
 }
 
-.gridFooter {
-    display: grid;
-    grid-template-columns: 5fr 2fr 3fr;
+.containerFooter {
+    display: flex;
+}
+
+#redes {
+    display: flex;
+    flex-direction: column;
+    justify-content: space-around;
     align-items: center;
-    gap: 25px;
-}
-
-#integran {
-    grid-row-start: 2;
-    grid-row-start: 1;
-    grid-row-end: 3;
-    font-size: 14pt;
-    font-weight: bold;
-}
-
-#roger {
-    grid-column-start: 3;
-    grid-row-start: 5;
-    grid-row-end: 7;
-    font-size: 10pt;
-}
-
-#joao {
-    grid-column-start: 3;
-    grid-row-start: 3;
-    grid-row-end: 5;
-    font-size: 10pt;
-}
-
-form {
-    grid-column-start: 1;
-    grid-row-start: 1;
-    grid-row-end: 7;
-}
-
-#facebook {
-    grid-column-start: 2;
-    grid-row-start: 1;
-    grid-row-end: 3;
-}
-
-#twitter {
-    grid-column-start: 2;
-    grid-row-start: 3;
-    grid-row-end: 5;
-}
-
-#instagram {
-    grid-column-start: 2;
-    grid-row-start: 5;
-    grid-row-end: 7;
 }
 
 footer a {
-    margin-left: 1.5em;
     width: 25px;
     text-align: center;
 }
@@ -313,6 +265,7 @@ textarea:focus {
 
 footer button {
     text-align: center;
+    width: 70px;
     height: 40px;
     border: none;
     border-radius: 10px;
@@ -320,6 +273,8 @@ footer button {
     color: #f5f5f5;
     cursor: pointer;
     transition: 0.5s;
+    grid-column-start: -2   ;
+    justify-self: end; 
 }
 
 footer button:hover {
@@ -328,24 +283,148 @@ footer button:hover {
     color: #3730a3;
 }
 
-@media (max-width: 1024px) {
-    nav {
-        font-size: 8pt;
-    }
+#integrantes {
+    display: flex;
+    flex-direction: column;
+}
+
+#titleIntegran {
+    font-weight: bold;
+    font-size: 14pt;
+    margin-bottom: 10px;
+}
+
+.nomesIntegran {
+    font-size: 10pt;
+    margin-top: 10px;
+}
+
+#hamburguer {
+    display: none;
+}
+
+#iconHamburguer {
+    display: none;
+    width: 40px;
+    color: #f5f5f5;
+    background-color: #6366f1;
+    border: none;
+    cursor: pointer;
+    border-radius: 10px;
+    transition: 0.5s;
+    margin-right: 0.5em;
+}
+
+#iconHamburguer svg {
+    padding: 5px 7px;
+}
+
+#iconHamburguer:hover {
+    background-color: #4f46e5;
+}
+
+#hamburguer:checked ~ nav{
+    display: grid;
     
+}
+
+@media (max-width: 1024px) {
     section {
         grid-template-columns: 1fr 1fr 1fr;
     }
+
+    textarea {
+        grid-column-start: -2;
+    }
+
+    form {
+        grid-template-columns: 80px 2fr 80px 2fr;
+    }
+
+    nav {
+        display: none;
+        grid-template-columns: 1fr 1fr 1fr 1fr 1fr;
+        height: 80px;
+    }
+
+    #iconHamburguer {
+        display: block;
+    }
+
 }
 
 @media (max-width: 768px) {
     section {
         grid-template-columns: 1fr 1fr;
     }
+
+    header h1 {
+        display: none;
+    }
+
+    nav {
+        display: none;
+        grid-template-columns: 1fr 1fr 1fr;
+        height: 148px;
+    }
+
+    form {
+        grid-template-columns: 80px 2fr;
+    }
+
 }
 
 @media (max-width: 640px) {
     section {
         grid-template-columns: 1fr;
+    }
+
+    form {
+        grid-template-columns: 1fr;
+    }
+
+    nav {
+        display: none;
+        grid-template-columns: 1fr;
+        height: 400px;
+    }
+
+    header img {
+        width: 60px;
+    }
+
+    .containerFooter {
+        flex-direction: column;
+    }
+
+    #redes {
+        flex-direction: row;
+        margin: 10px 0 25px 0;
+    }
+
+    header {
+        padding: 0 1.5em;
+    }
+
+    main {
+        padding: 0 1.5em;
+    }
+
+    footer {
+        padding: 2.5em 1.5em;
+    }
+
+    header .container {
+        display: grid;
+        grid-template-columns: 60px 1fr 25px 25px;
+        gap: 10px;
+    }
+
+    header #iconPesquisa {
+        margin: 0;
+    }
+
+    header button,  header #iconHamburguer {
+        width: 35px;
     }
 }
